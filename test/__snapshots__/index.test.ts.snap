@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convert should work 1`] = `
+"---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: frontend-443
+  labels:
+    app: frontend
+spec:
+  ports:
+    - appProtocol: TCP
+      targetPort: 8043
+      port: 443
+  selector:
+    app: frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: default
+  labels:
+    app: frontend
+  annotations:
+    com.example.description: Accounting webapp
+    com.example.department: Finance
+    com.example.label-with-empty-value: ""
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: awesome/webapp
+          command:
+            - echo
+            - hello
+            - world
+          volumeMounts:
+            - name: httpd-config
+              mountPath: /httpd-config
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+            - name: run
+              mountPath: /run
+          ports:
+            - containerPort: 8043
+              protocol: TCP
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: RACK_ENV
+              value: development
+            - name: SHOW
+              value: "true"
+            - name: USER_INPUT
+          securityContext:
+            capabilities:
+              add:
+                - ALL
+          resources:
+            limits:
+              cpu: 1m
+              memory: 50M
+            requests:
+              cpu: 0.1m
+              memory: 20M
+          livenessProbe:
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:8080
+      hostname: my-frontend
+      terminationGracePeriodSeconds: 90
+      volumes:
+        - name: httpd-config
+          configMap:
+            name: httpd-config
+        - name: tmp
+          emptyDir: {}
+        - name: run
+          emptyDir: {}
+  replicas: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-backend
+  namespace: default
+  labels:
+    app: my-backend
+  annotations: {}
+spec:
+  selector:
+    matchLabels:
+      app: my-backend
+  template:
+    metadata:
+      labels:
+        app: my-backend
+    spec:
+      containers:
+        - name: my-backend
+          image: awesome/database
+          volumeMounts:
+            - name: db-data
+              mountPath: /etc/data
+            - name: httpd-config
+              mountPath: /etc/apache2/httpd.conf
+              readOnly: true
+          ports: []
+          env:
+            - name: RACK_ENV
+              value: development
+            - name: SHOW
+              value: "true"
+            - name: USER_INPUT
+      volumes:
+        - name: db-data
+          emptyDir: {}
+        - name: httpd-config
+          configMap:
+            name: httpd-config
+  replicas: 1
+"
+`;

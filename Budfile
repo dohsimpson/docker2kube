@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Convert the JSON schema to a TypeScript interface
+function convert_kube_json_schema() {
+  rm _definitions.json
+  wget https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.27.2/_definitions.json
+  sed -i 's/\(io.k8s[^"]*\)\(\"\)/\1\.\2/' _definitions.json # Append a dot to all io.k8s definitions so that interface names are generated correctly
+  ./node_modules/json-schema-to-typescript/dist/src/cli.js kube-spec.json > kubeTypes.ts
+}
+
+# Convert the JSON schema to a TypeScript interface
+function convert_compose_json_schema() {
+  ./node_modules/json-schema-to-typescript/dist/src/cli.js compose-spec.json > composeTypes.ts
+}

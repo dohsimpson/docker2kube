@@ -1,0 +1,16 @@
+.DS_Store
+.idea
+.vscode
+npm-debug.log
+yarn-error.log
+node_modules
+*.map
+example
+test
+dist
+circle.yml
+ARCHITECTURE.md
+CONTRIBUTING.md
+.editorconfig
+package-lock.json
+yarn.lock
