@@ -1,0 +1,13 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var index_1 = __importDefault(require("../src/index"));
+describe('convert', function () {
+    it('should work', function () {
+        var yaml = "\n    services:\n      frontend:\n        labels:\n          - \"com.example.description=Accounting webapp\"\n          - \"com.example.department=Finance\"\n          - \"com.example.label-with-empty-value\"\n        image: awesome/webapp\n        ports:\n          - \"443:8043\"\n        expose:\n          - \"3000\"\n        hostname: my-frontend\n        networks:\n          - front-tier\n          - back-tier\n        configs:\n          - httpd-config\n        secrets:\n          - server-certificate\n        command: echo hello world\n        deploy:\n          replicas: 3\n          resources:\n            limits:\n              cpus: '0.001'\n              memory: 50M\n            reservations:\n              cpus: '0.0001'\n              memory: 20M\n          restart_policy:\n            condition: on-failure\n            delay: 5s\n            max_attempts: 3\n            window: 120s\n          placement:\n            constraints:\n              - node.role == manager\n              - engine.labels.operatingsystem == ubuntu 14.04\n        environment:\n          RACK_ENV: development\n          SHOW: \"true\"\n          USER_INPUT:\n        cap_add:\n          - ALL\n        tmpfs:\n          - /tmp\n          - /run\n        stop_grace_period: 1m30s\n        healthcheck:\n          test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:8080\"]\n          interval: 30s\n          timeout: 10s\n          retries: 3\n\n      backend:\n        container_name: my-backend\n        image: awesome/database\n        volumes:\n          - db-data:/etc/data\n        networks:\n          - back-tier\n        environment:\n          - RACK_ENV=development\n          - SHOW=true\n          - USER_INPUT\n        configs:\n          - source: httpd-config\n            target: /etc/apache2/httpd.conf\n            uid: '1000'\n            gid: '1000'\n            mode: 0440\n\n    volumes:\n      db-data:\n        driver: flocker\n        driver_opts:\n          size: \"10GiB\"\n\n    configs:\n      httpd-config:\n        file: ./httpd.conf\n\n    secrets:\n      server-certificate:\n        external: true\n\n    networks:\n      # The presence of these objects is sufficient to define them\n      front-tier: {}\n      back-tier: {}\n    ";
+        var result = (0, index_1.default)(yaml);
+        expect(result).toMatchSnapshot();
+    });
+});
