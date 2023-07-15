@@ -1,6 +1,6 @@
 {
   "name": "docker2kube",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/cli.ts",
@@ -8,6 +8,7 @@
     "prepublish": "tsc",
     "prepare": "npm run prepublish"
   },
+  "module": "dist/index.js",
   "author": "dohsimpson",
   "license": "MIT",
   "dependencies": {
