@@ -1,12 +1,13 @@
 {
   "name": "docker2kube",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/cli.ts",
     "test": "jest",
-    "prepublish": "tsc"
+    "prepublish": "tsc",
+    "prepare": "npm run prepublish"
   },
   "author": "dohsimpson",
   "license": "MIT",
