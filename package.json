@@ -1,12 +1,11 @@
 {
   "name": "docker2kube",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/cli.ts",
     "test": "jest",
-    "prepublish": "tsc",
-    "prepare": "npm run prepublish"
+    "prepublish": "tsc"
   },
   "module": "dist/index.js",
   "author": "dohsimpson",
@@ -21,5 +20,8 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
   },
-  "types": "./src/index.d.ts"
+  "types": "./src/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }
