@@ -1,6 +1,9 @@
 # docker2kube (d2k)
 
-d2k is a typescript library that converts docker-compose YAML files to Kubernetes YAML file. The goal is to make it painless to deploy docker-deployable project on Kubernetes.
+d2k is a typescript library that converts docker-compose YAML files to Kubernetes YAML file. The goal is to make it easy to deploy docker project on Kubernetes.
+
+# UI
+Visit https://docker2kube.app.enting.org/ to perform conversion online.
 
 # Installation
 NPM: `npm i docker2kube`
@@ -33,3 +36,4 @@ console.log(output);
 
 * [kompose](https://github.com/kubernetes/kompose) is the canonical tool for converting docker-compose templates. And inspired this project.
 * [json-schema-to-typescript](https://github.com/bcherny/json-schema-to-typescript) makes working with JSON schema a dream.
+* [composerize](https://github.com/magicmark/composerize) for converting docker command.
