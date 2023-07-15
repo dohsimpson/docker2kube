@@ -1,6 +1,6 @@
 {
   "name": "docker2kube",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/cli.ts",
@@ -20,7 +20,7 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
   },
-  "types": "./src/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ]
