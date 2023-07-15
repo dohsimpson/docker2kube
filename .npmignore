@@ -8,6 +8,7 @@ node_modules
 example
 test
 dist
+dist/*
 circle.yml
 ARCHITECTURE.md
 CONTRIBUTING.md
