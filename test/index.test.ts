@@ -1,5 +1,5 @@
 import convert from '../src/index'
-import { stringify } from 'yaml';
+import { parse, stringify } from 'yaml';
 
 describe('convert', () => {
   it('should work', () => {
@@ -106,5 +106,17 @@ describe('convert', () => {
           image: awesome/webapp
     `);
     expect(result).toMatchSnapshot();
+  });
+
+  it("handles base64 encoded env var correctly", () => {
+    const result = convert(`\
+      services:
+        frontend:
+          image: awesome/webapp
+          environment:
+            - BAR=Zm9vCg==
+    `);
+    const v = parse(result).spec.template.spec.containers[0].env[0].value;
+    expect(v).toEqual("Zm9vCg==");
   });
 })

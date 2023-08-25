@@ -3,7 +3,7 @@ import { parse, stringify } from 'yaml'
 import { Iok8SApiAppsV1Deployment, Iok8SApiCoreV1Capabilities, Iok8SApiCoreV1Container, Iok8SApiCoreV1ContainerPort, Iok8SApiCoreV1EnvVar, Iok8SApiCoreV1ExecAction, Iok8SApiCoreV1PodSecurityContext, Iok8SApiCoreV1Probe, Iok8SApiCoreV1ResourceRequirements, Iok8SApiCoreV1SecurityContext, Iok8SApiCoreV1Service, Iok8SApiCoreV1ServicePort, Iok8SApiCoreV1ServiceSpec, Iok8SApiCoreV1Volume, Iok8SApiCoreV1VolumeMount, Iok8SApimachineryPkgApisMetaV1ObjectMeta3, KubeSpec } from './kubeTypes'
 import { ComposeSpecification } from './composeTypes'
 
-import { fail, convertDurationToNumber, convertName, generateRandomString, parseCommand } from './helpers'
+import { fail, convertDurationToNumber, convertName, generateRandomString, parseCommand, splitOnFirst } from './helpers'
 
 export function convert(yaml: string): string {
   interface D2KConfig {
@@ -332,7 +332,8 @@ export function convert(yaml: string): string {
       if (Array.isArray(service.environment)) {
         // array of strings
         for (let env of service.environment) {
-          const [name, value] = env.split('=');
+          const [name, value] = splitOnFirst(env, '=');
+          if (!value) continue;
           const envVar: Iok8SApiCoreV1EnvVar = {} as Iok8SApiCoreV1EnvVar;
           envVar.name = name;
           envVar.value = value;

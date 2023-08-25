@@ -127,7 +127,6 @@ spec:
               value: development
             - name: SHOW
               value: "true"
-            - name: USER_INPUT
       volumes:
         - name: db-data
           emptyDir: {}
