@@ -98,4 +98,13 @@ describe('convert', () => {
     const result = convert(yaml);
     expect(result).toMatchSnapshot();
   });
+
+  it("will convert name to valid RFC 1123 hostname", () => {
+    const result = convert(`\
+      services:
+        name_with_underscores:
+          image: awesome/webapp
+    `);
+    expect(result).toMatchSnapshot();
+  });
 })

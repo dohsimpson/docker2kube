@@ -137,3 +137,31 @@ spec:
   replicas: 1
 "
 `;
+
+exports[`convert will convert name to valid RFC 1123 hostname 1`] = `
+"---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: name-with-underscores
+  namespace: default
+  labels:
+    app: name-with-underscores
+  annotations: {}
+spec:
+  selector:
+    matchLabels:
+      app: name-with-underscores
+  template:
+    metadata:
+      labels:
+        app: name-with-underscores
+    spec:
+      containers:
+        - name: name-with-underscores
+          image: awesome/webapp
+          ports: []
+          env: []
+  replicas: 1
+"
+`;

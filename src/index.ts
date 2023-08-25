@@ -27,6 +27,7 @@ export function convert(yaml: string): string {
     const service = composeObj.services[name];
     name = service.container_name || name; // use container_name as name if it exists
 
+    name = convertName(name);
 
     // deployment.metadata
     kubeDeployObj.metadata = kubeDeployObj.metadata || {};
