@@ -23,8 +23,8 @@ describe('convert', () => {
           - httpd-config
         secrets:
           - server-certificate
-        entrypoint: /bin/sh
-        command: echo hello world
+        entrypoint: echo
+        command: hello world
         deploy:
           replicas: 3
           resources:

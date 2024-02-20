@@ -41,11 +41,10 @@ spec:
         - name: frontend
           image: awesome/webapp
           args:
-            - echo
             - hello
             - world
           command:
-            - /bin/sh
+            - echo
           volumeMounts:
             - name: httpd-config
               mountPath: /httpd-config
