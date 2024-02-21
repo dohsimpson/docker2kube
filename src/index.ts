@@ -85,10 +85,10 @@ export function convert(yaml: string): string {
     const container: Iok8SApiCoreV1Container = {} as Iok8SApiCoreV1Container;
     container.name = name;
     container.image = service.image || 'PLACEHOLDER';
-    container.command = typeof service.command === 'string' ? 
+    container.args = typeof service.command === 'string' ? 
       parseCommand(service.command) : 
       service.command === null ? undefined : service.command;
-    container.entrypoint = typeof service.entrypoint === 'string' ?
+    container.command = typeof service.entrypoint === 'string' ?
       service.entrypoint.split(/\s+/) :
       service.entrypoint === null ? undefined : service.entrypoint;
 

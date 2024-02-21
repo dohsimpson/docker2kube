@@ -40,10 +40,11 @@ spec:
       containers:
         - name: frontend
           image: awesome/webapp
-          command:
-            - echo
+          args:
             - hello
             - world
+          command:
+            - echo
           volumeMounts:
             - name: httpd-config
               mountPath: /httpd-config
