@@ -12,3 +12,12 @@ function convert_kube_json_schema() {
 function convert_compose_json_schema() {
   ./node_modules/json-schema-to-typescript/dist/src/cli.js compose-spec.json > composeTypes.ts
 }
+
+publish() {
+  echo "Bump patch version?"
+  read -r
+  npm version patch  # bump version
+  echo "Publish?"
+  read -r
+  npm publish
+}

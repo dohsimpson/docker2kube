@@ -1,6 +1,6 @@
 {
   "name": "docker2kube",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/cli.ts",
